@@ -53,7 +53,7 @@ type FormData = z.infer<typeof formSchema>;
 export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {},
+    defaultValues: initialData ? { ...initialData, experience: Number(initialData.experience) } : {},
   });
 
   const { isValid, isSubmitting } = form.formState;
@@ -168,7 +168,7 @@ export const FormMockInterview = ({ initialData }: FormMockInterviewProps) => {
       form.reset({
         position: initialData.position,
         description: initialData.description,
-        experience: initialData.experience,
+        experience: Number(initialData.experience),
         techStack: initialData.techStack,
       });
     }
